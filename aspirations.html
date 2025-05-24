@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Aspirations</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/aspirations.css">
+    <link rel="icon" type="image/svg+xml" href="assets/nachikethreddy.svg">
+    
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">
+            <a href="#" class="icons">Zer<span class="logoicon"><i class='bx bx-stop-circle'></i></span> Waste Lifestyle</a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="nav_links">Home</a></li>
+            <li><a href="about.html" class="nav_links">About Me</a></li>
+            <li><a href="aspirations.html" class="nav_links active">Personal Aspirations</a></li>
+        </ul>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
+    
+<header>
+        <div class="leaf"></div>
+        <div class="leaf"></div>
+        <div class="leaf"></div>
+        <div class="leaf"></div>
+        <div class="leaf"></div>
+        <div class="leaf"></div>
+        <div class="leaf"></div>
+        <div class="leaf"></div>
+        <div class="leaf"></div>
+        <div class="leaf"></div>
+        <div class="leaf"></div>
+        <div class="leaf"></div>
+  <!-- Wave Background -->
+    <div class="wave-container">
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+    </div>
+
+    <div class="container_header">
+        <!-- Profile Section -->
+        <div class="profile-container">
+            <div class="profile-image floating">
+                <div class="profile-placeholder"><img src="assets/nachikethreddy.svg" alt="nachikethreddy logo"></div>
+            </div>
+            <h1 class="name">Nachiketh Reddy</h1>
+            <h2 class="title">Web Developer & Environmentalist</h2>
+            <h3 class="page-title">Personal Aspirations</h3>
+            <p class="subtitle">Progress over perfection • One step at a time</p>
+
+        </div>
+    </div>
+</header>
+
+
+<main class="container">
+        <!-- Goals Section -->
+        <section id="goals">
+            <h2 class="section-title">🌱 My Zero-Waste Goals</h2>
+            <div class="goals-grid">
+                
+                <div class="goal-card" onclick="animateCard(this)">
+                    <span class="goal-icon">♻️</span>
+                    <h3 class="goal-title">Reusable Containers</h3>
+                    <p>I carry reusable containers daily – from food to shopping – to avoid single-use plastics. Even takeaways go in my own containers!</p>
+                </div>
+                <div class="goal-card" onclick="animateCard(this)">
+                    <span class="goal-icon">🌿</span>
+                    <h3 class="goal-title">Composting Food Waste</h3>
+                    <p>I started composting fruit and vegetable scraps at home using a DIY compost bin. It's small-scale, but it reduces a lot of my daily trash!</p>
+                </div>
+                <div class="goal-card" onclick="animateCard(this)">
+                    <span class="goal-icon">🧼</span>
+                    <h3 class="goal-title">Natural, Refillable Products</h3>
+                    <p>I'm transitioning to solid soaps, refillable shampoos, and toothpaste tablets to cut down on plastic bottles and tubes.</p>
+                </div>
+            </div>
+        </section>
+
+                   
+
+
+        <!-- Struggles Section -->
+        <section id="struggles">
+            <h2 class="section-title">🚧 The Struggles Are Real</h2>
+            <div class="struggles-grid">
+                <div class="flashcard">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="card-content">
+                                👨‍👩‍👧‍👦 <b>Challenge: Family Habits</b><br>
+                                My family still prefers plastic bags and disposables. It's tough to change routines.
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <div class="card-content">
+                                ✅ <b>Solution:</b><br>
+                                I asked them to try reusable alternatives for just 30 days. Small wins like using reusable bottles or cloth bags make a difference!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flashcard style-2">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="card-content">
+                                🏪 <b>Challenge: Convenience</b><br>
+                                Sometimes I forget my containers or it's just quicker to grab packaged snacks.
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <div class="card-content">
+                                ✅ <b>Solution:</b><br>
+                                I now keep a 'zero-waste kit' (bag, box, water bottle, etc.) in my backpack and my bike!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flashcard style-3">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="card-content">
+                                💰 <b>Challenge: Cost of Alternatives</b><br>
+                                Eco-products can feel expensive upfront.
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <div class="card-content">
+                                ✅ <b>Solution:</b><br>
+                                I started with second-hand jars and containers. I reuse milk cartons too!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+         <!-- Timeline Section -->
+        <section id="timeline">
+            <h2 class="section-title">📈 My Zero-Waste Journey Timeline</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content" onclick="pulseIcon(this)">
+                        <div class="timeline-date">January 2024</div>
+                        <p>Started using reusable water bottles</p>
+                    </div>
+                    <div class="timeline-icon">💧</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content" onclick="pulseIcon(this)">
+                        <div class="timeline-date">March 2024</div>
+                        <p>Built a DIY compost bin from cardboard</p>
+                    </div>
+                    <div class="timeline-icon">🗑️</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content" onclick="pulseIcon(this)">
+                        <div class="timeline-date">April 2024</div>
+                        <p>Switched to solid bar soaps</p>
+                    </div>
+                    <div class="timeline-icon">🧼</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content" onclick="pulseIcon(this)">
+                        <div class="timeline-date">May 2024</div>
+                        <p>Convinced family to try reusables</p>
+                    </div>
+                    <div class="timeline-icon">👨‍👩‍👦</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Impact Section -->
+        <section id="impact">
+            <h2 class="section-title">📊 My Impact</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number" data-target="35">0</span>
+                    <span class="stat-label">🧴 Plastic Containers Avoided</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" data-target="5">0</span>
+                    <span class="stat-label">🍌 Food Scraps Composted (kg/month)</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" data-target="20">0</span>
+                    <span class="stat-label">💰 Money Saved ($/month)</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mission Section -->
+        <section id="mission" class="mission">
+            <p class="mission-text">
+                <blockquote>
+                My goal isn't perfection—it's progress. By rethinking waste and choosing better habits, 
+                I believe I can reduce my yearly waste to under 100kg and inspire others along the way. 
+                Every small action creates ripples of change. 
+                </blockquote>
+    
+        </section>
+
+        <!-- Flashcards Section -->
+        <section id="flashcards">
+            <h1 style="text-align: center; font-size: 3rem;">Before you go, here are some tips form me!</h1>
+            <h2 class="section-title">💡 Zero-Waste Tips</h2>
+            <p style="text-align: center;">💡<b style="color: #2ECC71;">Tip:</b> Hover over the cards</p>
+            <div class="cards-grid">
+                <div class="flashcard style-1" onclick="this.classList.toggle('flipped')">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="card-content">
+                                <h3>Carry a Water Bottle</h3>
+                                <p>Refillable bottles reduce plastic waste.</p>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <div class="card-content">
+                                <h3>💧 Stay Hydrated!</h3>
+                                <p>Refilling is cheaper and eco-friendly.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flashcard style-2" onclick="this.classList.toggle('flipped')">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="card-content">
+                                <h3>Use Cloth Bags</h3>
+                                <p>Bring your own bags to reduce plastic use.</p>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <div class="card-content">
+                                <h3>🛍️ Shop Smart!</h3>
+                                <p>Cloth bags are durable and reusable.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flashcard style-3" onclick="this.classList.toggle('flipped')">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="card-content">
+                                <h3>Compost Organic Waste</h3>
+                                <p>Start a compost bin for food scraps.</p>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <div class="card-content">
+                                <h3>🌱 Enrich Your Soil!</h3>
+                                <p>Composting reduces landfill waste and helps plants grow.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flashcard style-4" onclick="this.classList.toggle('flipped')">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <div class="card-content">
+                                <h3>Choose Refillable Products</h3>
+                                <p>Opt for products you can refill, not just recycle.</p>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <div class="card-content">
+                                <h3>🔄 Join the Refill Revolution!</h3>
+                                <p>Refillable products cut down on single-use packaging.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <div class="logo-container">
+                    <div class="author-logo"><img src="assets/nachikethreddy.svg" alt="Nachiketh Logo"></img></div>
+                    <div class="separator">X</div>
+                    <div class="sp-logo"><img src="assets/sp.svg" alt="SP Logo"></div>
+                </div>
+                <p>A Project for Singapore Poly</p>
+            </div>
+            
+            <p class="footer-quote">"Small actions, when multiplied by millions of people, can transform the world."</p>
+            
+            <p class="copyright">©2025 Nachiketh Reddy. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/style.js"></script>
+    <script>
+        
+        // Randomize leaf movement
+        const leaves = document.querySelectorAll('.leaf');
+        
+        leaves.forEach(leaf => {
+            leaf.style.animationDuration = Math.random() * 10 + 15 + 's';
+            leaf.style.width = Math.random() * 30 + 20 + 'px';
+            leaf.style.height = Math.random() * 30 + 20 + 'px';
+            leaf.style.opacity = Math.random() * 0.4 + 0.2;
+            leaf.style.backgroundColor = `rgba(${Math.floor(Math.random() * 50 + 100)}, ${Math.floor(Math.random() * 50 + 180)}, ${Math.floor(Math.random() * 30 + 170)}, 0.7)`;
+        });
+        
+        // Smooth scroll reveal animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // Animate stats when impact section comes into view
+                    if (entry.target.id === 'impact') {
+                        animateStats();
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // // Observe all sections
+        // document.querySelectorAll('section').forEach(section => {
+        //     observer.observe(section);
+        // });
+
+        // Animate goal cards
+        function animateCard(card) {
+            card.style.transform = 'scale(1.1) rotate(2deg)';
+            setTimeout(() => {
+                card.style.transform = 'scale(1)';
+            }, 200);
+        }
+
+        // Pulse timeline icons
+        function pulseIcon(content) {
+            const icon = content.parentElement.querySelector('.timeline-icon');
+            icon.style.transform = 'translateX(-50%) scale(1.2)';
+            icon.style.background = 'linear-gradient(135deg, #F39C12, #D35400)';
+            setTimeout(() => {
+                icon.style.transform = 'translateX(-50%) scale(1)';
+                icon.style.background = 'linear-gradient(135deg, #2ECC71, #27AE60)';
+            }, 300);
+        }
+
+        // Animate statistics numbers
+        function animateStats() {
+    const stats = document.querySelectorAll('.stat-number');
+    
+    stats.forEach(stat => {
+        const target = parseInt(stat.getAttribute('data-target'));
+        let current = 0;
+        const increment = target / 100;
+        const duration = 2000; // 2 seconds
+        const stepTime = duration / 100;
+        
+        const counter = setInterval(() => {
+            current += increment;
+            
+            if (current >= target) {
+                stat.textContent = target;
+                clearInterval(counter);
+            } else {
+                stat.textContent = Math.floor(current);
+            }
+        }, stepTime);
+    });
+}
+
+
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Initialize particles on load
+        document.addEventListener('DOMContentLoaded', createParticles);
+
+        // Add smooth scrolling for better UX
+        document.documentElement.style.scrollBehavior = 'smooth';
+    </script>
+        </body>
+</html>
