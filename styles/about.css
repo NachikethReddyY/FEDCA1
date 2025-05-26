@@ -245,7 +245,7 @@ body {
             border-radius: 12px;
             padding: 25px;
             width: 100%;
-            align-items: left;
+            align-items: flex-start;
             min-width: 0;
             max-width: 340px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.05);
@@ -369,7 +369,7 @@ body {
         
         .timeline-item:nth-child(odd) {
             left: 0;
-            margin-right: 4;
+            margin-right: 4px;
         }
         
         .timeline-item:nth-child(even) {
@@ -586,10 +586,6 @@ body {
   background: linear-gradient(90deg, #ff9900 0%, #ff6536 100%);
 }
 .social-btn.substack:hover {
-  background-position: right;
-  box-shadow: 0 0 16px 2px #ff9900a0;
-  transform: translateY(-3px) scale(1.05);
-}
   background-position: right;
   box-shadow: 0 0 16px 2px #ff9900a0;
   transform: translateY(-3px) scale(1.05);

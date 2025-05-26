@@ -61,7 +61,6 @@
 
 
 
-
         <!-- Info Cards -->
         <div class="info-cards">
             <!-- Skills Card -->
@@ -111,7 +110,6 @@
             </div>
         </div>
     </div>
-</div>
  
 <!-- timeline -->
 <section class="experiences" id="experiences">
@@ -161,16 +159,15 @@
                 </div>
             </div>
                 
-        </div>
     </div>
 </section>
 
     <!-- Green Hacks section -->
 <section>
     <div class="container">
-        <h2 class="section-title">Green Hacks that I tried</h2>
+        <h2 class="section-title">Green Hacks that I Tried</h2>
         <p style="text-align: center">Simple and effective tips to reduce waste in your daily life.</p>
-        <section class="green-hacks">
+        <div class="green-hacks">
 
   <div class="card-grid">
     <div class="card">
@@ -219,12 +216,9 @@
       <p>Reduce packaging waste by buying dry goods in bulk.</p>
     </div>
   </div>
+</div>
+</div>
 </section>
-</section>
-
-
-
-
 <h1 class="connect">Connect with Me</h1>
 
 <div class="social-buttons">
@@ -251,18 +245,14 @@
 
 
 
-
-
-
-
     
     <!-- Footer -->
     <footer>
         <div class="footer-content">
             <div class="footer-logo">
                 <div class="logo-container">
-                    <div class="author-logo"><img src="assets/nachikethreddy.svg" alt="Nachiketh Logo"></img></div>
-                    <div class="separator">X</div>
+                    <div class="author-logo"><img src="assets/nachikethreddy.svg" alt="Nachiketh Logo"></div>
+                    <div class="separator">x</div>
                     <div class="sp-logo"><img src="assets/sp.svg" alt="SP Logo"></div>
                 </div>
                 <p>A Project for Singapore Poly</p>
@@ -274,16 +264,16 @@
         </div>
     </footer>
 
-    <script src="js/style.js">
+    <script src="js/style.js"></script>
 
-            // Animate progress bars
-            const progressBars = document.querySelectorAll('.progress');
-            progressBars.forEach(bar => {
-                const width = bar.getAttribute('data-width');
-                setTimeout(() => {
-                    bar.style.width = `${width}%`;
-                }, 300);
-            });
+    <script>
+        // Animate progress bars
+        const progressBars = document.querySelectorAll('.progress');
+        progressBars.forEach(bar => {
+            const width = bar.style.width; // Get the width from the style attribute
+            bar.style.width = '0%'; // Reset width for animation
+            setTimeout(() => { bar.style.width = width; }, 300); // Animate to original width
+        });
     </script>
 </body>
 </html>
