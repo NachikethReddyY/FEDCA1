@@ -517,7 +517,7 @@ body {
 }
 .social-buttons {
   display: flex;
-  gap: 1.2rem;
+  gap: 2rem;
   justify-content: center;
   margin: 2rem 0;
   flex-wrap: wrap;
@@ -539,6 +539,8 @@ body {
   cursor: pointer;
   background-size: 200% 200%;
   background-position: left;
+  position: relative; /* Ensure this is present for ::after positioning */
+  z-index: 1;         /* Ensure button content is above its pseudo-element shadow */
 }
 
 .social-btn i {
@@ -556,13 +558,27 @@ body {
 }
 
 /* Instagram */
+
 .social-btn.instagram {
   background: linear-gradient(90deg, #fd5949 0%, #d6249f 50%, #285AEB 100%);
 }
+.social-btn.instagram::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit; /* Match the button's border-radius (2rem from .social-btn) */
+  background: linear-gradient(90deg, #fd5949 0%, #d6249f 50%, #285AEB 100%); /* Your desired gradient */
+  filter: blur(15px);     /* Adjust blur amount for shadow softness */
+  z-index: -1;            /* Place it behind the button */
+  opacity: 0;             /* Hidden by default */
+  transition: opacity 0.3s ease-in-out; /* Smooth transition for the shadow */
+}
 .social-btn.instagram:hover {
   background-position: right;
-  box-shadow: 0 0 16px 2px #d6249fa0;
-  transform: translateY(-3px) scale(1.05);
+  transform: translateY(-3px) scale(1.05); /*Nice hover effect */
 }
 
 /* Substack */
@@ -574,9 +590,17 @@ body {
   box-shadow: 0 0 16px 2px #ff9900a0;
   transform: translateY(-3px) scale(1.05);
 }
+  background-position: right;
+  box-shadow: 0 0 16px 2px #ff9900a0;
+  transform: translateY(-3px) scale(1.05);
+}
 .social-btn.substack i {
     font-size: 1.3rem;  /* Adjust size to match other icons */
 }
+.social-btn.instagram:hover::after {
+  opacity: 0.7; /* Show the gradient shadow on hover; adjust opacity as needed */
+}
+
 
 /* GitHub */
 .social-btn.github {
