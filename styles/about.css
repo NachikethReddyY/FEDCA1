@@ -505,3 +505,96 @@ body {
   font-size: 1rem;
   color: #6c757d;
 }
+
+
+.connect{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+    animation: fadeIn 1s ease-out;
+}
+.social-buttons {
+  display: flex;
+  gap: 1.2rem;
+  justify-content: center;
+  margin: 2rem 0;
+  flex-wrap: wrap;
+}
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.5rem;
+  border: none;
+  border-radius: 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff;
+  text-decoration: none;
+  box-shadow: 0 4px 16px -4px rgba(0,0,0,0.10);
+  transition: transform 0.2s, box-shadow 0.2s, background 0.4s;
+  cursor: pointer;
+  background-size: 200% 200%;
+  background-position: left;
+}
+
+.social-btn i {
+  font-size: 1.4rem;
+}
+
+/* LinkedIn */
+.social-btn.linkedin {
+  background: linear-gradient(90deg, #0077b5 0%, #00c6fb 100%);
+}
+.social-btn.linkedin:hover {
+  background-position: right;
+  box-shadow: 0 0 16px 2px #0077b5a0;
+  transform: translateY(-3px) scale(1.05);
+}
+
+/* Instagram */
+.social-btn.instagram {
+  background: linear-gradient(90deg, #fd5949 0%, #d6249f 50%, #285AEB 100%);
+}
+.social-btn.instagram:hover {
+  background-position: right;
+  box-shadow: 0 0 16px 2px #d6249fa0;
+  transform: translateY(-3px) scale(1.05);
+}
+
+/* Substack */
+.social-btn.substack {
+  background: linear-gradient(90deg, #ff9900 0%, #ff6536 100%);
+}
+.social-btn.substack:hover {
+  background-position: right;
+  box-shadow: 0 0 16px 2px #ff9900a0;
+  transform: translateY(-3px) scale(1.05);
+}
+.social-btn.substack i {
+    font-size: 1.3rem;  /* Adjust size to match other icons */
+}
+
+/* GitHub */
+.social-btn.github {
+  background: linear-gradient(90deg, #333 0%, #6e5494 100%);
+}
+.social-btn.github:hover {
+  background-position: right;
+  box-shadow: 0 0 16px 2px #6e5494a0;
+  transform: translateY(-3px) scale(1.05);
+}
+
+/* Email */
+.social-btn.email {
+    background: linear-gradient(90deg, #d44638 0%, #ea4335 100%);
+}
+
+.social-btn.email:hover {
+    background: linear-gradient(90deg, #c13e32 0%, #d33426 100%);
+    box-shadow: 0 0 20px rgba(234, 67, 53, 0.4);
+    transform: translateY(-2px);
+}

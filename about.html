@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/about.css">
     <link rel="icon" type="image/svg+xml" href="assets/nachikethreddy.svg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
 </head>
 <body>
@@ -224,7 +225,25 @@
 
 
 
+<h1 class="connect">Connect with Me</h1>
 
+<div class="social-buttons">
+  <button onclick="window.open('https://www.linkedin.com/in/ynr-nachiketh-reddy', '_blank')" class="social-btn linkedin">
+    <i class='bx bxl-linkedin'></i> LinkedIn
+  </button>
+  <button onclick="window.open('https://www.instagram.com/nachikethreddy_ynr', '_blank')" class="social-btn instagram">
+    <i class='bx bxl-instagram'></i> Instagram
+  </button>
+  <button onclick="window.open('https://ynrdeveloperjourney.substack.com/', '_blank')" class="social-btn substack">
+    <i class="fa-solid fa-newspaper"></i> Substack
+  </button>
+  <button onclick="window.open('https://github.com/nachikethreddyy', '_blank')" class="social-btn github">
+    <i class='bx bxl-github'></i> GitHub
+  </button>
+  <button onclick="window.open('mailto:y.nachiketh.reddy@gmail.com')" class="social-btn email">
+    <i class='bx bx-envelope'></i> Email
+  </button>
+</div>
 
 
 
@@ -256,8 +275,7 @@
     </footer>
 
     <script src="js/style.js">
-        // Initialize animations when page loads
-        document.addEventListener('DOMContentLoaded', function() {
+
             // Animate progress bars
             const progressBars = document.querySelectorAll('.progress');
             progressBars.forEach(bar => {
@@ -266,7 +284,6 @@
                     bar.style.width = `${width}%`;
                 }, 300);
             });
-        });
     </script>
 </body>
 </html>

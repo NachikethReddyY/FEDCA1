@@ -450,7 +450,10 @@ nav {
 
 /* Principles Section */
 .principles {
-    padding: 4rem 2rem;
+    padding-top: 4rem;
+    padding-left: 2rem;
+    padding-bottom: 1rem;
+    padding-right: 2rem;
     background-color: white;
     text-align: center;
 }
@@ -469,7 +472,7 @@ nav {
 
 .principles-viewer {
     position: relative;
-    margin-bottom: 2rem;
+    margin-bottom: 0;         /* Reduced from 2rem to 0 */
     min-height: 380px;
     padding: 2rem 3rem;
     display: flex;
@@ -478,8 +481,8 @@ nav {
     background: #f8f9fa;
     border-radius: 1rem;
     text-align: justify;
-    width: 95%;    /* Match gallery width */
-    margin: 2rem auto 2rem;  /* Center and add bottom margin */
+    width: 95%;              /* Match gallery width */
+    margin: 2rem auto 0;     /* Changed bottom margin to 0 */
 }
 
 .principle-card {
