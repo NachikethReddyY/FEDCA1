@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Representation Notes - Nachiketh Reddy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9fafb; /* Light gray background */
+        }
+        /* CTA Button (top right) */
+        .cta-button {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 50;
+            background: #4f46e5;
+            color: #fff;
+            padding: 0.7rem 1.4rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            font-size: 1rem;
+            border: none;
+            box-shadow: 0 4px 12px rgba(79,70,229,0.08);
+            transition: background 0.2s, transform 0.1s;
+            cursor: pointer;
+        }
+        .cta-button:hover {
+            background: #4338ca;
+            transform: translateY(-2px) scale(1.03);
+        }
+        /* Copyright (bottom left) */
+        .copyright-affirmation {
+            position: fixed;
+            bottom: 1rem;
+            left: 1rem;
+            z-index: 40;
+            color: #6b7280;
+            font-size: 0.98rem;
+            background: rgba(255,255,255,0.85);
+            padding: 0.4rem 1rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            font-family: inherit;
+        }
+        .notion-sidebar {
+            background-color: #ffffff;
+            border-right: 1px solid #e5e7eb;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .notion-content {
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .notion-link:hover {
+            background-color: #f3f4f6;
+        }
+        .notion-active-link {
+            background-color: #e5e7eb;
+            font-weight: 600;
+        }
+        /* Custom scrollbar for better aesthetics */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        /* Notion-like card and headings */
+        .notion-like-card {
+            background-color: #ffffff;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .notion-like-heading {
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+        .notion-like-subheading {
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 0.75rem;
+        }
+        .notion-like-text {
+            color: #4b5563;
+            line-height: 1.625;
+            margin-bottom: 1rem;
+        }
+        .notion-like-list {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .notion-like-list-item {
+            color: #4b5563;
+            margin-bottom: 0.5rem;
+        }
+        .notion-like-code-block {
+            background-color: #e5e7eb;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+            font-size: 0.875rem;
+            overflow-x: auto;
+            margin-bottom: 1rem;
+        }
+        .notion-like-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1rem;
+            background-color: #f3f4f6;
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+        .notion-like-table th, .notion-like-table td {
+            border: 1px solid #d1d5db;
+            padding: 0.75rem;
+            text-align: left;
+            color: #374151;
+        }
+        .notion-like-table th {
+            background-color: #e5e7eb;
+            font-weight: 600;
+        }
+        .notion-like-table tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
+        .notion-like-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        }
+        .anchor-link {
+            scroll-margin-top: 80px;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen bg-gray-50 text-gray-800">
+    <button class="cta-button" onclick="window.location.href='index.html'">Back to home</button>
+    <p class="copyright-affirmation">&copy; Nachiketh Reddy 2025</p>
+    <div class="flex flex-1">
+        <aside class="notion-sidebar w-64 p-4 hidden md:block overflow-y-auto">
+            <h2 class="text-xl font-bold mb-4 text-gray-800">Digital Representation</h2>
+            <nav>
+                <ul>
+                    <li class="mb-2">
+                        <a href="#introduction" class="notion-link block p-2 rounded-md text-gray-700 hover:text-gray-900 transition-colors duration-200">
+                            Introduction
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="#number-representation" class="notion-link block p-2 rounded-md text-gray-700 hover:text-gray-900 transition-colors duration-200">
+                            Number Representation
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="#arithmetic-operations" class="notion-link block p-2 rounded-md text-gray-700 hover:text-gray-900 transition-colors duration-200">
+                            Arithmetic Operations
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="#character-representation" class="notion-link block p-2 rounded-md text-gray-700 hover:text-gray-900 transition-colors duration-200">
+                            Character Representation
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="#glossary" class="notion-link block p-2 rounded-md text-gray-700 hover:text-gray-900 transition-colors duration-200">
+                            Glossary
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+        <main class="flex-1 p-6 md:p-8 overflow-y-auto notion-content rounded-lg m-4 flex justify-center">
+            <div class="w-full max-w-5xl">
+                <section id="introduction" class="notion-like-card anchor-link">
+                    <h2 class="notion-like-heading text-3xl">Introduction</h2>
+                    <p class="notion-like-text">
+                        This study guide is designed to help you review the concepts covered in "Topic 02 Digital Representation." It includes a quiz, essay questions, and a glossary of key terms.
+                        Understanding how information is represented digitally is fundamental to computer science. From simple numbers to complex images and sounds, everything inside a computer is ultimately stored and processed as binary data.
+                    </p>
+                    <h3 class="notion-like-subheading text-xl">Quiz Questions</h3>
+                    <ul class="notion-like-list">
+                        <li class="notion-like-list-item">What is the most natural way to represent a number in a computer system?</li>
+                        <li class="notion-like-list-item">Briefly describe the denary (or decimal) number system.</li>
+                        <li class="notion-like-list-item">Explain the weighted sum method for converting a binary number to decimal.</li>
+                        <li class="notion-like-list-item">How do you convert a decimal number to binary?</li>
+                        <li class="notion-like-list-item">What is the range of numbers that can be represented by an unsigned binary number with N bits?</li>
+                        <li class="notion-like-list-item">Why are octal and hexadecimal systems used to represent binary numbers?</li>
+                        <li class="notion-like-list-item">How is the sign of a number indicated in signed integer representation?</li>
+                        <li class="notion-like-list-item">What is the difference between 1's complement and 2's complement when representing negative numbers?</li>
+                        <li class="notion-like-list-item">Briefly describe the rules for adding two binary numbers.</li>
+                        <li class="notion-like-list-item">What is overflow in the context of arithmetic operations on signed integers?</li>
+                    </ul>
+                    <h3 class="notion-like-subheading text-xl">Quiz Answer Key</h3>
+                    <p class="notion-like-text">
+                        The most natural way to represent a number in a computer system is by a string of bits, called a binary number.
+                        The denary (or decimal) number system is the number system people use daily. It has a radix of 10, meaning it uses 10 digits (0 through 9).
+                        The weighted sum method for binary to decimal conversion involves multiplying each binary digit by its corresponding positional value (powers of 2) and summing the results.
+                        To convert a decimal number to binary, you repeatedly divide the decimal number by 2, keeping track of the remainders. The binary representation is read from the last remainder (MSB) to the first (LSB).
+                        The range of numbers that can be represented by an unsigned binary number with N bits is from $0$ to $2^N-1$.
+                        Octal (Base 8) and Hexadecimal (Base 16) systems are used as a shorthand to represent binary numbers because they can more compactly represent strings of bits, making them easier for humans to read and write accurately.
+                        In signed integer representation, the leftmost bit (most significant bit, or MSB) is used to indicate the sign: $0$ for positive and $1$ for negative.
+                        In 1's complement, negative values are obtained by complementing each bit of the corresponding positive number. In 2's complement, you form the 1's complement and then add $1$.
+                        The four rules for adding binary numbers are: $0+0=0$, $0+1=1$, $1+1=10$ (binary for 2), and $1+1+1=11$ (binary for 3).
+                        Overflow in signed integer arithmetic occurs when the result of an arithmetic operation does not fit within the representable number range for the given number of bits.
+                    </p>
+                </section>
+
+                <section id="number-representation" class="notion-like-card anchor-link">
+                    <h2 class="notion-like-heading text-3xl">Number Representation</h2>
+
+                    <h3 class="notion-like-subheading text-xl">Binary Numbers</h3>
+                    <p class="notion-like-text">
+                        The most natural way to represent a number in a computer system is by a string of bits, called a binary number. A bit is a single binary digit ($0$ or $1$).
+                    </p>
+
+                    <h3 class="notion-like-subheading text-xl">Denary (Decimal) Number System</h3>
+                    <p class="notion-like-text">
+                        People use the denary (or decimal) number system in their day-to-day lives. This system has a radix (base) of $10$, using digits $0$ through $9$. Each digit's value depends on its position, known as its positional value (powers of $10$).
+                    </p>
+                    <div class="notion-like-code-block">
+                        <img src="https://placehold.co/600x200/e0e0e0/333333?text=Decimal+Positional+Value+Table" alt="Table showing decimal positional values (10^0, 10^1, etc.)" class="notion-like-image">
+                        <p class="text-gray-700 text-sm mt-2"><em>Replace this image with your actual "Number Representation - Decimal" table from the PPT.</em></p>
+                    </div>
+                    <p class="notion-like-text">
+                        In binary, each place value is $2$ times bigger than the last (i.e., increased by the power of $2$).
+                    </p>
+                    <div class="notion-like-code-block">
+                        <img src="https://placehold.co/600x150/e0e0e0/333333?text=Binary+Positional+Value+Table" alt="Table showing binary positional values (2^0, 2^1, etc.)" class="notion-like-image">
+                        <p class="text-gray-700 text-sm mt-2"><em>Replace this image with your actual binary place values table from the PPT.</em></p>
+                    </div>
+
+                    <h3 class="notion-like-subheading text-xl">Converting Binary to Decimal (Weighted Sum Method)</h3>
+                    <p class="notion-like-text">
+                        To convert a binary number to decimal, use the weighted sum method. Multiply each binary digit by its corresponding positional value (powers of $2$) and sum the results. The rightmost bit is the Least Significant Bit (LSB), and the leftmost is the Most Significant Bit (MSB).
+                    </p>
+                    <div class="notion-like-code-block">
+                        <img src="https://placehold.co/600x250/e0e0e0/333333?text=Binary+to+Decimal+Example" alt="Example of converting binary to decimal using weighted sum" class="notion-like-image">
+                        <p class="text-gray-700 text-sm mt-2"><em>Replace this image with your actual "How to convert binary to decimal?" diagram from the PPT.</em></p>
+                    </div>
+
+                    <h3 class="notion-like-subheading text-xl">Converting Decimal to Binary</h3>
+                    <p class="notion-like-text">
+                        To convert a decimal number to binary, repeatedly divide the number by $2$, keeping track of the remainder. The binary representation is read from the last remainder (MSB) to the first (LSB).
+                    </p>
+                    <div class="notion-like-code-block">
+                        <img src="https://placehold.co/600x300/e0e0e0/333333?text=Decimal+to+Binary+Example" alt="Example of converting decimal to binary by repeated division" class="notion-like-image">
+                        <p class="text-gray-700 text-sm mt-2"><em>Replace this image with your actual "How to convert decimal numbers to binary?" table from the PPT.</em></p>
+                    </div>
+
+                    <h3 class="notion-like-subheading text-xl">Unsigned Integers</h3>
+                    <p class="notion-like-text">
+                        Unsigned integers represent only non-negative values. If there are $N$ bits in the binary number, the range of the number is from $0$ to $2^N-1$. For example, with $3$ bits, the range is $0$ to $2^3-1 = 7$ ($000$ to $111$). For $8$ bits, the range is $0$ to $2^8-1 = 255$.
+                        Unsigned numbers are often used for memory addresses, cluster numbers in file systems, and process identifiers (PIDs).
+                    </p>
+
+                    <h3 class="notion-like-subheading text-xl">Octal (Base 8) and Hexadecimal (Base 16)</h3>
+                    <p class="notion-like-text">
+                        Strings of bits can be difficult for humans to read and write accurately. Octal (Base $8$) and Hexadecimal (Base $16$) systems are used as a shorthand to represent binary numbers, making them more compact and readable.
+                        Hexadecimal uses digits $0-9$ and letters $A-F$ (where $A=10, B=11, \dots, F=15$). Each hexadecimal digit corresponds to exactly $4$ binary bits.
+                    </p>
+                    <div class="notion-like-code-block">
+                        <img src="https://placehold.co/600x400/e0e0e0/333333?text=Binary+Hex+Decimal+Table" alt="Table showing binary, hexadecimal, and decimal equivalents" class="notion-like-image">
+                        <p class="text-gray-700 text-sm mt-2"><em>Replace this image with your actual "Binary | Hex | Decimal" table from the PPT.</em></p>
+                    </div>
+                    <p class="notion-like-text">
+                        <strong>Denoting Hexadecimal:</strong>
+                    </p>
+                    <ul class="notion-like-list">
+                        <li class="notion-like-list-item">Place $0x$ before the hex numeral: e.g., $0x3573$</li>
+                        <li class="notion-like-list-item">Append a lowercase letter $h$ after the numeral: e.g., $3573h$</li>
+                        <li class="notion-like-list-item">Use the $16$ subscript: e.g., $3573_{16}$</li>
+                        <li class="notion-like-list-item">Specify base $16$: e.g., $3573$ (base $16$)</li>
+                    </ul>
+
+                    <h3 class="notion-like-subheading text-xl">Signed Integers</h3>
+                    <p class="notion-like-text">
+                        Signed integers represent both positive and negative values. The leftmost bit (MSB) indicates the sign: $0$ for positive and $1$ for negative. There are three primary ways to represent signed integers:
+                    </p>
+                    <ul class="notion-like-list">
+                        <li class="notion-like-list-item"><strong>Sign-and-Magnitude:</strong> The MSB indicates the sign, and the remaining bits represent the magnitude.</li>
+                        <li class="notion-like-list-item"><strong>1's Complement:</strong> Negative values are obtained by inverting all bits of the corresponding positive number.</li>
+                        <li class="notion-like-list-item"><strong>2's Complement:</strong> Negative values are obtained by taking the 1's complement and then adding $1$. This is the most efficient and commonly used method in modern computers for arithmetic operations.</li>
+                    </ul>
+                    <div class="notion-like-code-block">
+                        <img src="https://placehold.co/600x400/e0e0e0/333333?text=Signed+Integer+Representation+Table" alt="Table comparing sign-and-magnitude, 1's complement, and 2's complement" class="notion-like-image">
+                        <p class="text-gray-700 text-sm mt-2"><em>Replace this image with your actual "Values represented" table from the PPT.</em></p>
+                    </div>
+                    <p class="notion-like-text">
+                        <strong>Example of 2's Complement:</strong>
+                        To form $-5$ from $+5$ ($0101$ in $4$-bit):
+                        <ul class="notion-like-list">
+                            <li class="notion-like-list-item">Original: $0101$ ($+5$)</li>
+                            <li class="notion-like-list-item">1's Complement (invert bits): $1010$</li>
+                            <li class="notion-like-list-item">Add $1$: $1010 + 1 = 1011$ ($-5$)</li>
+                        </ul>
+                    </p>
+                </section>
+
+                <section id="arithmetic-operations" class="notion-like-card anchor-link">
+                    <h2 class="notion-like-heading text-3xl">Arithmetic Operations</h2>
+
+                    <h3 class="notion-like-subheading text-xl">Binary Addition</h3>
+                    <p class="notion-like-text">
+                        The four rules for adding binary numbers are:
+                    </p>
+                    <ul class="notion-like-list">
+                        <li class="notion-like-list-item">$0 + 0 = 0$</li>
+                        <li class="notion-like-list-item">$1 + 0 = 1$</li>
+                        <li class="notion-like-list-item">$1 + 1 = 10$ (binary for $2$, carry $1$)</li>
+                        <li class="notion-like-list-item">$1 + 1 + 1 = 11$ (binary for $3$, carry $1$)</li>
+                    </ul>
+                    <div class="notion-like-code-block">
+                        <img src="https://placehold.co/600x300/e0e0e0/333333?text=Binary+Addition+Examples" alt="Examples of binary addition" class="notion-like-image">
+                        <p class="text-gray-700 text-sm mt-2"><em>Replace this image with your actual "Addition" examples (a, b, c, d) from the PPT.</em></p>
+                    </div>
+
+                    <h3 class="notion-like-subheading text-xl">Binary Subtraction</h3>
+                    <p class="notion-like-text">
+                        Subtraction is typically performed by forming the 2's complement of the subtrahend (the number being subtracted) and then performing normal binary addition.
+                    </p>
+                    <p class="notion-like-text">
+                        <strong>Example:</strong> Subtract $-5$ ($1011$) from $-2$ ($1110$)
+                        <ul class="notion-like-list">
+                            <li class="notion-like-list-item">Original: $1110$ ($-2$) $- 1011$ ($-5$)</li>
+                            <li class="notion-like-list-item">2's complement of $1011$ ($-5$) is $0101$ ($+5$)</li>
+                            <li class="notion-like-list-item">Perform addition: $1110 + 0101 = 0011$ ($-2 + 5 = +3$)</li>
+                        </ul>
+                    </p>
+                    <div class="notion-like-code-block">
+                        <img src="https://placehold.co/600x300/e0e0e0/333333?text=Binary+Subtraction+Examples" alt="Examples of binary subtraction using 2's complement" class="notion-like-image">
+                        <p class="text-gray-700 text-sm mt-2"><em>Replace this image with your actual "Subtraction" examples (e, f, g, h, i, j) from the PPT.</em></p>
+                    </div>
+
+                    <h3 class="notion-like-subheading text-xl">Overflow</h3>
+                    <p class="notion-like-text">
+                        Overflow occurs when the result of an arithmetic operation does not fit within the representable number range for the given number of bits. For $N$-bit signed integers, the range is from $-2^{N-1}$ to $+2^{N-1}-1$. For example, with $4$ bits, the range is $-8$ to $+7$.
+                    </p>
+                    <p class="notion-like-text">
+                        <strong>Conditions for Overflow:</strong>
+                    </p>
+                    <ul class="notion-like-list">
+                        <li class="notion-like-list-item"><strong>Addition:</strong> If two numbers with the same sign are added, and the result has the opposite sign.
+                            <ul class="notion-like-list">
+                                <li class="notion-like-list-item">$(+A) + (+B) = -C$</li>
+                                <li class="notion-like-list-item">$(-A) + (-B) = +C$</li>
+                            </ul>
+                        </li>
+                        <li class="notion-like-list-item"><strong>Subtraction:</strong> If two numbers with different signs are subtracted, and the result has the same sign as the subtrahend (the number being subtracted).
+                            <ul class="notion-like-list">
+                                <li class="notion-like-list-item">$(+A) - (-B) = -C$</li>
+                                <li class="notion-like-list-item">$(-A) - (+B) = +C$</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <p class="notion-like-text">
+                        <strong>Case Study: Ariane 5 Rocket Crash</strong><br>
+                        A famous example of the consequences of overflow is the Ariane 5 rocket explosion. A small computer program tried to stuff a $64$-bit number into a $16$-bit space, leading to an arithmetic error and total destruction. This highlights the critical importance of handling number ranges and potential overflows in software development.
+                    </p>
+
+                    <h3 class="notion-like-subheading text-xl">Sign Extension</h3>
+                    <p class="notion-like-text">
+                        Sign extension is the process of increasing the number of bits of a signed binary number while preserving its sign and value. This is done by replicating the sign bit (MSB) to the left.
+                    </p>
+                    <div class="notion-like-code-block">
+                        <img src="https://placehold.co/600x150/e0e0e0/333333?text=Sign+Extension+Examples" alt="Examples of sign extension from 4-bit to 8-bit signed integers" class="notion-like-image">
+                        <p class="text-gray-700 text-sm mt-2"><em>Replace this image with your actual "Sign extension" diagram from the PPT.</em></p>
+                    </div>
+                </section>
+
+                <section id="character-representation" class="notion-like-card anchor-link">
+                    <h2 class="notion-like-heading text-3xl">Character Representation</h2>
+
+                    <h3 class="notion-like-subheading text-xl">ASCII (American Standard Code for Information Interchange)</h3>
+                    <p class="notion-like-text">
+                        ASCII is a character encoding standard that uses $7$-bit codes to represent text characters. This allows for $128$ unique characters, sufficient for English alphabet, numbers, and basic symbols.
+                    </p>
+                    <div class="notion-like-code-block">
+                        <img src="https://placehold.co/600x400/e0e0e0/333333?text=ASCII+Table" alt="ASCII character table" class="notion-like-image">
+                        <p class="text-gray-700 text-sm mt-2"><em>Replace this image with your actual "ASCII TABLE" from the PPT.</em></p>
+                    </div>
+
+                    <h3 class="notion-like-subheading text-xl">Unicode</h3>
+                    <p class="notion-like-text">
+                        While ASCII is sufficient for English, it lacks support for accents in European languages and larger alphabets like Cyrillic or Chinese Mandarin. Unicode was created to address this limitation, providing a standard to represent characters from virtually all languages. This allows computers to be used by people worldwide regardless of their native language.
+                    </p>
+                    <div class="notion-like-code-block">
+                        <img src="https://placehold.co/600x350/e0e0e0/333333?text=Unicode+Example" alt="Example of Chinese character to Unicode conversion" class="notion-like-image">
+                        <p class="text-gray-700 text-sm mt-2"><em>Replace this image with your actual "Chinese Converter" screenshot from the PPT.</em></p>
+                    </div>
+
+                    <h3 class="notion-like-subheading text-xl">Representing Sound</h3>
+                    <p class="notion-like-text">
+                        Sound needs to be converted into binary for computers to process it. This involves capturing sound (e.g., via a microphone) and converting it into a digital signal through sampling. The samples are then converted to binary, typically recorded to the nearest whole number.
+                    </p>
+                    <div class="notion-like-code-block">
+                        <img src="https://placehold.co/600x300/e0e0e0/333333?text=Sound+Representation+Diagram" alt="Graph showing sound wave sampling and conversion to denary/binary" class="notion-like-image">
+                        <p class="text-gray-700 text-sm mt-2"><em>Replace this image with your actual "Time sample" graph and table from the PPT.</em></p>
+                    </div>
+
+                    <h3 class="notion-like-subheading text-xl">Encoding Images</h3>
+                    <p class="notion-like-text">
+                        When an image is encoded, it is broken up into individual pixels. Each pixel is the smallest controllable element of a picture on the screen. Color is typically represented using a combination of Red, Green, and Blue (RGB) values, where each color component is assigned a numerical value (e.g., $0-255$).
+                    </p>
+                    <div class="notion-like-code-block">
+                        <img src="https://placehold.co/600x350/e0e0e0/333333?text=Image+Encoding+Pixels+RGB" alt="Diagram showing image broken into pixels with RGB values" class="notion-like-image">
+                        <p class="text-gray-700 text-sm mt-2"><em>Replace this image with your actual "Encoding Images" diagram from the PPT.</em></p>
+                    </div>
+                </section>
+
+                <section id="glossary" class="notion-like-card anchor-link">
+                    <h2 class="notion-like-heading text-3xl">Glossary of Key Terms</h2>
+                    <dl class="notion-like-text">
+                        <dt class="font-semibold text-gray-800 mt-4">Binary Number:</dt>
+                        <dd class="ml-4">A number represented using only the digits $0$ and $1$.</dd>
+
+                        <dt class="font-semibold text-gray-800 mt-2">Bit:</dt>
+                        <dd class="ml-4">A single binary digit ($0$ or $1$).</dd>
+
+                        <dt class="font-semibold text-gray-800 mt-2">Denary Number (Decimal Number):</dt>
+                        <dd class="ml-4">The base-$10$ number system commonly used by humans.</dd>
+
+                        <dt class="font-semibold text-gray-800 mt-2">Radix (Base):</dt>
+                        <dd class="ml-4">The number of unique digits, including zero, used to represent numbers in a positional numeral system.</dd>
+
+                        <dt class="font-semibold text-gray-800 mt-2">Positional Value:</dt>
+                        <dd class="ml-4">The value assigned to a digit based on its position in a number. In decimal, these are powers of $10$; in binary, they are powers of $2$.</dd>
+
+                        <dt class="font-semibold text-gray-800 mt-2">Weighted Sum Method:</dt>
+                        <dd class="ml-4">A method for converting a number from a different base to decimal by multiplying each digit by its positional value and summing the results.</dd>
+
+                        <dt class="font-semibold text-gray-800 mt-2">LSB (Least Significant Bit):</dt>
+                        <dd class="ml-4">The rightmost bit in a binary number, representing the smallest positional value.</dd>
+
+                        <dt class="font-semibold text-gray-800 mt-2">MSB (Most Significant Bit):</dt>
+                        <dd class="ml-4">The leftmost bit in a binary number, representing the largest positional value.</dd>
+
+                        <dt class="font-semibold text-gray-800 mt-2">Unsigned Integers:</dt>
+                        <dd class="ml-4">Binary numbers that represent only non-negative values.</dd>
+
+                        <dt class="font-semibold text-gray-800 mt-2">Signed Integers:</dt>
+                        <dd class="ml-4">Binary numbers that represent both positive and negative values.</dd>
+
+                        <dt class="font-semibold text-gray-800 mt-2">Sign-and-Magnitude:</dt>
+                        <dd class="ml-4">A method of representing signed integers where the most significant bit indicates the sign and the remaining bits represent the magnitude of the number.</dd>
+
+                        <dt class="font-semibold text-gray-800 mt-2">1's Complement:</dt>
+                        <dd class="ml-4">A method of representing negative signed integers by inverting all the bits of the corresponding positive number.</dd>
+
+                        <dt class="font-semibold text-gray-800 mt-2">2's Complement:</dt>
+                        <dd class="ml-4">A method of representing negative signed integers by taking the 1's complement and adding $1$.</dd>
+
+                        <dt class="font-semibold text-gray-800 mt-2">Octal (Base 8):</dt>
+                        <dd class="ml-4">A number system with a radix of $8$, using digits $0-7$. Often used as a shorthand for binary.</dd>
+
+                        <dt class="font-semibold text-gray-800 mt-2">Hexadecimal (Base 16):</dt>
+                        <dd class="ml-4">A number system with a radix of $16$, using digits $0-9$ and letters $A-F$. Often used as a shorthand for binary.</dd>
+
+                        <dt class="font-semibold text-gray-800 mt-2">ASCII (American Standard Code for Information Interchange):</dt>
+                        <dd class="ml-4">A character encoding standard that uses $7$-bit codes to represent text characters.</dd>
+
+                        <dt class="font-semibold text-gray-800 mt-2">Unicode:</dt>
+                        <dd class="ml-4">A character encoding standard designed to represent characters from all languages.</dd>
+
+                        <dt class="font-semibold text-gray-800 mt-2">Pixel:</dt>
+                        <dd class="ml-4">The smallest controllable element of a picture represented on the screen.</dd>
+
+                        <dt class="font-semibold text-gray-800 mt-2">Overflow:</dt>
+                        <dd class="ml-4">A condition that occurs in arithmetic operations when the calculated result is larger in magnitude than the maximum value that can be represented with the given number of bits.</dd>
+
+                        <dt class="font-semibold text-gray-800 mt-2">Sign Extension:</dt>
+                        <dd class="ml-4">The process of increasing the number of bits of a signed binary number while preserving its sign and value.</dd>
+                    </dl>
+                </section>
+            </div>
+        </main>
+    </div>
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                // Update active link styling
+                document.querySelectorAll('.notion-link').forEach(link => {
+                    link.classList.remove('notion-active-link');
+                });
+                this.classList.add('notion-active-link');
+            });
+        });
+        // Highlight active link on scroll
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.notion-link');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - sectionHeight / 3) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navLinks.forEach(link => {
+                link.classList.remove('notion-active-link');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('notion-active-link');
+                }
+            });
+        });
+        // Initial active link highlight on load
+        window.addEventListener('load', () => {
+            const firstSectionLink = document.querySelector('.notion-link');
+            if (firstSectionLink) {
+                firstSectionLink.classList.add('notion-active-link');
+            }
+        });
+    </script>
+</body>
+</html>

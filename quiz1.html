@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Concepts Challenge</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for the game */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Light blue-gray background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        
+        /* CTA Button (top right) */
+        .cta-button {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 50;
+            background: #4f46e5;
+            color: #fff;
+            padding: 0.7rem 1.4rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            font-size: 1rem;
+            border: none;
+            box-shadow: 0 4px 12px rgba(79,70,229,0.08);
+            transition: background 0.2s, transform 0.1s;
+            cursor: pointer;
+        }
+        .cta-button:hover {
+            background: #4338ca;
+            transform: translateY(-2px) scale(1.03);
+        }
+
+        /* Copyright (bottom left) */
+        .copyright-affirmation {
+            position: fixed;
+            bottom: 1rem;
+            left: 1rem;
+            z-index: 40;
+            color: #6b7280;
+            font-size: 0.98rem;
+            background: rgba(255,255,255,0.85);
+            padding: 0.4rem 1rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            font-family: inherit;
+        }
+        .game-container {
+            background-color: #ffffff;
+            border-radius: 1.5rem; /* More rounded corners */
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            padding: 2.5rem; /* Increased padding */
+            max-width: 800px; /* Max width for larger screens */
+            width: 100%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .question-area {
+            margin-bottom: 1.5rem;
+            min-height: 120px; /* Ensure consistent height for questions */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .option-button {
+            background-color: #e2e8f0; /* Light gray for options */
+            color: #2d3748; /* Dark text */
+            padding: 0.75rem 1.25rem;
+            border-radius: 0.75rem; /* Rounded corners for buttons */
+            margin: 0.5rem 0;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+            width: 100%; /* Full width */
+            text-align: left; /* Align text left */
+            font-size: 1.1rem;
+            border: 1px solid #cbd5e0; /* Subtle border */
+        }
+
+        .option-button:hover:not(.correct):not(.incorrect):not(.disabled) {
+            background-color: #cbd5e0; /* Darker gray on hover */
+            transform: translateY(-2px); /* Slight lift effect */
+        }
+
+        .option-button.correct {
+            background-color: #d1fae5; /* Light green */
+            color: #065f46; /* Dark green text */
+            border-color: #34d399;
+            animation: pulse-green 0.5s ease-out;
+        }
+
+        .option-button.incorrect {
+            background-color: #fee2e2; /* Light red */
+            color: #991b1b; /* Dark red text */
+            border-color: #ef4444;
+            animation: shake 0.3s ease-out;
+        }
+
+        .option-button.disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .feedback-message {
+            margin-top: 1rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            min-height: 40px; /* Consistent height for feedback */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .explanation {
+            margin-top: 1rem;
+            background-color: #f0f9ff; /* Very light blue */
+            border-left: 4px solid #3b82f6; /* Blue border */
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: left;
+            font-size: 0.95rem;
+            color: #1e40af; /* Dark blue text */
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between; /* Adjusted for single next button */
+            width: 100%;
+            margin-top: 1.5rem;
+        }
+        
+        .navigation-buttons > button { /* Ensure next button is on the right */
+            margin-left: auto;
+        }
+
+
+        .nav-button {
+            background-color: #4f46e5; /* Indigo */
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+            font-weight: 600;
+            border: none;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .nav-button:hover {
+            background-color: #4338ca; /* Darker indigo */
+            transform: translateY(-2px);
+        }
+
+        .nav-button:disabled {
+            background-color: #9ca3af; /* Gray for disabled */
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+
+        .start-screen, .results-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .start-screen h1, .results-screen h2 {
+            font-size: 2.25rem; /* Larger heading */
+            font-weight: 700;
+            color: #1f2937; /* Dark gray */
+            margin-bottom: 1.5rem;
+        }
+
+        .start-screen p {
+            font-size: 1.1rem;
+            color: #4b5563;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .results-screen p {
+            font-size: 1.25rem;
+            color: #374151;
+            margin-bottom: 1.5rem;
+        }
+
+        .score-display {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #10b981; /* Green for score */
+            margin-bottom: 1rem;
+        }
+
+        .short-answer-input {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 0.75rem;
+            border: 1px solid #cbd5e0;
+            margin-top: 1rem;
+            font-size: 1rem;
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .submit-button {
+            background-color: #10b981; /* Green */
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+            font-weight: 600;
+            border: none;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            margin-top: 1rem;
+        }
+
+        .submit-button:hover {
+            background-color: #059669; /* Darker green */
+            transform: translateY(-2px);
+        }
+
+        .submit-button:disabled {
+            background-color: #9ca3af; /* Gray for disabled */
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+
+        /* Keyframe animations */
+        @keyframes pulse-green {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+            100% { transform: translateX(0); }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 640px) {
+            .game-container {
+                padding: 1.5rem;
+                border-radius: 1rem;
+            }
+            .start-screen h1, .results-screen h2 {
+                font-size: 1.75rem;
+            }
+            .option-button {
+                font-size: 1rem;
+                padding: 0.6rem 1rem;
+            }
+            .nav-button, .submit-button {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Responsive for phones */
+        @media (max-width: 640px) {
+            body {
+                padding: 6px;
+            }
+            .game-container {
+                padding: 0.7rem;
+                border-radius: 0.7rem;
+                max-width: 100vw;
+                min-width: 0;
+            }
+            .cta-button {
+                top: 0.5rem;
+                right: 0.5rem;
+                padding: 0.5rem 1rem;
+                font-size: 0.95rem;
+            }
+            .copyright-affirmation {
+                left: 0.5rem;
+                bottom: 0.5rem;
+                font-size: 0.92rem;
+                padding: 0.3rem 0.7rem;
+            }
+            .start-screen h1, .results-screen h2 {
+                font-size: 1.25rem;
+            }
+            .option-button {
+                font-size: 0.98rem;
+                padding: 0.5rem 0.7rem;
+            }
+            .nav-button, .submit-button {
+                padding: 0.5rem 1rem;
+                font-size: 0.92rem;
+            }
+            .short-answer-input {
+                font-size: 0.98rem;
+                min-height: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="cta-button" onclick="window.location.href='index.html'">Back to home</button>
+    <p class="copyright-affirmation">&copy; Nachiketh Reddy 2025</p>
+    
+    <div id="game" class="game-container">
+        <div id="start-screen" class="start-screen">
+            <h1 class="text-4xl font-extrabold text-gray-800 mb-4">Computer Concepts Challenge!</h1>
+            <p class="text-lg text-gray-600 mb-8">
+                Test your knowledge on the fundamental components and operations of computer systems.
+                Answer questions about hardware, data, storage, the instruction cycle, and the Little Man Computer.
+                This game includes both multiple-choice and short-answer questions.
+                Good luck!
+            </p>
+            <button id="start-button" class="nav-button">Start Game</button>
+        </div>
+
+        <div id="quiz-screen" class="hidden w-full">
+            <p class="text-gray-600 text-lg mb-4">Question <span id="question-number"></span> of <span id="total-questions"></span></p>
+            <div class="question-area">
+                <p id="question-text" class="text-2xl font-semibold text-gray-800 mb-6"></p>
+            </div>
+            <div id="options-container" class="flex flex-col w-full gap-3">
+                </div>
+            <div id="feedback-area" class="feedback-message"></div>
+            <div id="explanation-area" class="explanation hidden"></div>
+            <div class="navigation-buttons">
+                <button id="next-button" class="nav-button" disabled>Next Question</button>
+            </div>
+        </div>
+
+        <div id="results-screen" class="results-screen hidden">
+            <h2 class="text-4xl font-extrabold text-gray-800 mb-4">Game Over!</h2>
+            <p class="text-xl text-gray-700 mb-2">You scored:</p>
+            <p id="final-score" class="score-display text-5xl mb-6"></p>
+            <button id="restart-button" class="nav-button">Play Again</button>
+        </div>
+    </div>
+
+    <script>
+        // Array of questions for the game
+        const questions = [
+            // Basic Functions of a Computer
+            {
+                question: "Which basic computer function involves the CPU interpreting typed letters?",
+                type: "multiple_choice",
+                options: ["Input", "Processing", "Output", "Storage"],
+                answer: "Processing",
+                explanation: "Processing is where the CPU interprets and acts on input data, such as looking up keyboard codes."
+            },
+            {
+                question: "A printer is primarily an example of which basic computer function?",
+                type: "multiple_choice",
+                options: ["Input", "Processing", "Output", "Storage"],
+                answer: "Output",
+                explanation: "Output devices present processed data to the user."
+            },
+            {
+                question: "Which function is responsible for saving data for future use, like saving a document to a hard drive?",
+                type: "multiple_choice",
+                options: ["Input", "Processing", "Output", "Storage"],
+                answer: "Storage",
+                explanation: "Storage components like hard drives and SSDs are used for saving data long-term."
+            },
+            // Data Representation: Bits and Bytes
+            {
+                question: "What is the smallest unit of data in a computer?",
+                type: "multiple_choice",
+                options: ["Byte", "Kilobyte", "Bit", "Megabyte"],
+                answer: "Bit",
+                explanation: "A bit is a binary digit, holding a value of 1 or 0, and is the smallest unit of data."
+            },
+            {
+                question: "How many bits are in a byte?",
+                type: "multiple_choice",
+                options: ["4", "8", "16", "32"],
+                answer: "8",
+                explanation: "A byte is a collection of 8 bits."
+            },
+            // Processing Components
+            {
+                question: "Which component is often called the 'brain' of the computer and executes instructions?",
+                type: "multiple_choice",
+                options: ["RAM", "Motherboard", "Hard Drive", "CPU"],
+                answer: "CPU",
+                explanation: "The CPU (Central Processing Unit) is the main processing component responsible for executing instructions."
+            },
+            {
+                question: "Within the CPU, which unit performs arithmetic operations (like addition) and logical operations (like comparison)?",
+                type: "multiple_choice",
+                options: ["Control Unit (CU)", "Registers", "Arithmetic Logic Unit (ALU)", "Program Counter (PC)"],
+                answer: "Arithmetic Logic Unit (ALU)",
+                explanation: "The ALU is responsible for all arithmetic and logical computations within the CPU."
+            },
+            {
+                question: "Which CPU component manages and coordinates the other components by interpreting instructions and directing the flow of data?",
+                type: "multiple_choice",
+                options: ["ALU", "Registers", "Control Unit (CU)", "Graphics Processing Unit (GPU)"],
+                answer: "Control Unit (CU)",
+                explanation: "The Control Unit interprets instructions and directs the operations of the CPU and other computer components."
+            },
+            {
+                question: "What are small, high-speed storage locations within the CPU that temporarily hold data and instructions currently being processed?",
+                type: "multiple_choice",
+                options: ["Cache Memory", "RAM", "Registers", "Hard Drive"],
+                answer: "Registers",
+                explanation: "Registers are the fastest storage within the CPU, used for immediate data access during processing."
+            },
+            {
+                question: "Which specialized electronic circuit is designed to rapidly manipulate memory to accelerate the creation of images and animations?",
+                type: "multiple_choice",
+                options: ["CPU", "NIC", "GPU", "ALU"],
+                answer: "GPU",
+                explanation: "The Graphics Processing Unit (GPU) is specialized for rendering graphics and accelerating visual output."
+            },
+            // Storage Components
+            {
+                question: "Which type of memory is directly accessible by the CPU, is faster, but loses data when power is off (volatile)?",
+                type: "multiple_choice",
+                options: ["Hard Disk Drive (HDD)", "Solid State Drive (SSD)", "Random Access Memory (RAM)", "Optical Storage"],
+                answer: "Random Access Memory (RAM)",
+                explanation: "RAM is primary, volatile memory directly used by the CPU for active programs and data. It's the computer's 'workbench'."
+            },
+            {
+                question: "Which storage device uses spinning platters and read/write heads to store data magnetically, and is considered non-volatile?",
+                type: "multiple_choice",
+                options: ["Solid State Drive (SSD)", "Hard Disk Drive (HDD)", "USB Flash Drive", "CD-ROM"],
+                answer: "Hard Disk Drive (HDD)",
+                explanation: "HDDs are mechanical storage devices that store data magnetically on spinning platters and retain data without power."
+            },
+            {
+                question: "Which non-volatile storage device uses flash memory, offering faster speeds and greater durability than HDDs, and retains data without power?",
+                type: "multiple_choice",
+                options: ["RAM", "Cache Memory", "Solid State Drive (SSD)", "Optical Storage"],
+                answer: "Solid State Drive (SSD)",
+                explanation: "SSDs use flash memory, providing significant speed and durability advantages over traditional HDDs, and are non-volatile."
+            },
+            {
+                question: "Optical storage devices like CDs, DVDs, and Blu-ray discs use what to read and write data?",
+                type: "multiple_choice",
+                options: ["Magnetic pulses", "Electrical signals", "Lasers", "Radio waves"],
+                answer: "Lasers",
+                explanation: "Optical storage technology relies on lasers to interact with the disc surface for data storage and retrieval."
+            },
+            {
+                question: "What is used as virtual memory when a computer's RAM is insufficient, and where is it typically located?",
+                type: "multiple_choice",
+                options: ["CPU Registers", "Cache Memory", "A portion of the disk drive (HDD/SSD)", "Network storage"],
+                answer: "A portion of the disk drive (HDD/SSD)",
+                explanation: "When RAM is insufficient, the operating system uses a portion of the disk drive (long-term storage) as virtual memory. This is much slower than actual RAM."
+            },
+            // Volatile vs Non-Volatile Memory
+            {
+                question: "Which of the following is an example of non-volatile memory?",
+                type: "multiple_choice",
+                options: ["RAM", "Cache memory", "Registers", "USB flash drive"],
+                answer: "USB flash drive",
+                explanation: "Non-volatile memory retains data even when power is off. RAM, cache, and registers are volatile."
+            },
+            {
+                question: "If a memory type requires power to maintain stored information and loses data when power is off, it is classified as:",
+                type: "multiple_choice",
+                options: ["Non-volatile", "Persistent", "Volatile", "Archival"],
+                answer: "Volatile",
+                explanation: "Volatile memory depends on continuous power to retain its data. RAM is a key example."
+            },
+            // Motherboard and Buses
+            {
+                question: "What is the main circuit board in a computer that connects all the components and allows them to communicate?",
+                type: "multiple_choice",
+                options: ["CPU", "Power Supply", "Motherboard", "RAM Module"],
+                answer: "Motherboard",
+                explanation: "The motherboard is the central hub, often called the 'town square' or 'central nervous system', connecting all parts of the computer."
+            },
+            {
+                question: "Sets of wires on the motherboard that carry signals (data, addresses, control signals) between components are known as:",
+                type: "multiple_choice",
+                options: ["Ports", "Slots", "Buses", "Sockets"],
+                answer: "Buses",
+                explanation: "Buses are the communication pathways on the motherboard, like highways for digital information."
+            },
+            {
+                question: "Which type of bus carries the actual information being moved between RAM and the CPU, or other I/O devices?",
+                type: "multiple_choice",
+                options: ["Address Bus", "Control Bus", "Data Bus", "Expansion Bus"],
+                answer: "Data Bus",
+                explanation: "The Data Bus carries the 'what' – the actual data being processed or transferred."
+            },
+            {
+                question: "Which type of bus carries the memory location or port address, telling the system where data is coming from or going to?",
+                type: "multiple_choice",
+                options: ["Address Bus", "Control Bus", "Data Bus", "System Bus"],
+                answer: "Address Bus",
+                explanation: "The Address Bus carries the 'where' – the specific location for the data transfer."
+            },
+            // NIC Basics and Wireless NIC
+            {
+                question: "What does NIC stand for?",
+                type: "multiple_choice",
+                options: ["Network Interface Controller", "Network Internet Card", "Network Interface Card", "New Internet Connection"],
+                answer: "Network Interface Card",
+                explanation: "A NIC (Network Interface Card) is required to attach a computer to a network."
+            },
+            {
+                question: "Which type of NIC typically connects via an Ethernet cable using an RJ-45 connector?",
+                type: "multiple_choice",
+                options: ["Wireless NIC", "Bluetooth NIC", "Wired NIC", "Fiber Optic NIC"],
+                answer: "Wired NIC",
+                explanation: "Wired NICs use Ethernet cables and RJ-45 connectors for network connectivity."
+            },
+            {
+                question: "What is the name assigned to a wireless network, used by Wireless NICs to connect?",
+                type: "multiple_choice",
+                options: ["MAC Address", "IP Address", "SSID", "DNS"],
+                answer: "SSID",
+                explanation: "The Service Set Identifier (SSID) is the name of the wireless network."
+            },
+            {
+                question: "The 802.11 standards (e.g., 802.11ac, 802.11n) refer to which type of networking?",
+                type: "multiple_choice",
+                options: ["Wired Ethernet", "Fiber Optic", "Wireless Wi-Fi", "Bluetooth"],
+                answer: "Wireless Wi-Fi",
+                explanation: "IEEE 802.11 is the family of standards for wireless local area networks (WLANs), commonly known as Wi-Fi."
+            },
+            // Topic 1b: Processor and Instruction Cycle
+            {
+                question: "What is the fundamental process by which a computer's CPU executes instructions, often referred to as the Fetch-Decode-Execute Cycle?",
+                type: "multiple_choice",
+                options: ["Boot Procedure", "Memory Allocation", "Instruction Cycle", "Data Transfer"],
+                answer: "Instruction Cycle",
+                explanation: "The instruction cycle (or machine cycle) is the core operational process of the CPU for every instruction."
+            },
+            {
+                question: "In the instruction cycle, what is the first step where the CPU retrieves the next instruction from memory?",
+                type: "multiple_choice",
+                options: ["Decode", "Execute", "Fetch", "Write Back"],
+                answer: "Fetch",
+                explanation: "The Fetch phase is the initial step of retrieving an instruction from memory (RAM or cache)."
+            },
+            {
+                question: "Which component of the CPU holds the memory address of the *next* instruction to be fetched?",
+                type: "multiple_choice",
+                options: ["Instruction Register (IR)", "General-Purpose Register", "Program Counter (PC)", "Memory Data Register (MDR)"],
+                answer: "Program Counter (PC)",
+                explanation: "The Program Counter (PC) always points to the memory address of the next instruction to be executed."
+            },
+            {
+                question: "After an instruction is fetched from memory, where is it temporarily stored within the CPU for decoding and execution?",
+                type: "multiple_choice",
+                options: ["Program Counter (PC)", "Accumulator", "Instruction Register (IR)", "ALU"],
+                answer: "Instruction Register (IR)",
+                explanation: "The Instruction Register (IR) holds the current instruction that the CPU is processing."
+            },
+            {
+                question: "During which phase of the instruction cycle does the Control Unit interpret the instruction held in the IR to determine what operation needs to be performed?",
+                type: "multiple_choice",
+                options: ["Fetch", "Decode", "Execute", "Memory Access"],
+                answer: "Decode",
+                explanation: "In the Decode phase, the Control Unit interprets the instruction's opcode and operands."
+            },
+            {
+                question: "The CPU periodically checking I/O devices to see if they require service is known as...",
+                type: "multiple_choice",
+                options: ["Interrupt", "Buffering", "Polling", "Direct Memory Access"],
+                answer: "Polling",
+                explanation: "Polling involves the CPU actively checking devices at regular intervals for readiness."
+            },
+            {
+                question: "When an I/O device directly signals the CPU that it needs attention, this mechanism is called a(n):",
+                type: "multiple_choice",
+                options: ["Polling request", "Interrupt", "Direct Memory Access", "Bus arbitration"],
+                answer: "Interrupt",
+                explanation: "An interrupt allows an I/O device to pause the CPU's current task to handle an urgent request."
+            },
+            // Little Man Computer (LMC) - Conceptual Questions
+            {
+                question: "In the Little Man Computer (LMC) model, what is the equivalent of the main memory (RAM), where instructions and data are stored in numbered locations?",
+                type: "multiple_choice",
+                options: ["Accumulator", "Program Counter", "Input/Output Baskets", "Mailboxes"],
+                answer: "Mailboxes",
+                explanation: "In the LMC, mailboxes (numbered 00-99) represent memory locations where instructions and data are stored."
+            },
+            {
+                question: "What is the primary function of the 'Accumulator' in the Little Man Computer (LMC) model?",
+                type: "short_answer",
+                model_answer: "The Accumulator in the LMC is a special register that temporarily holds a single data value during calculations (like addition or subtraction) and for input/output operations. It acts as a workspace for the Little Man.",
+                explanation: "The Accumulator is central to LMC operations, holding values for arithmetic and data transfer. All calculations happen using the accumulator."
+            },
+            // LMC "Next Step" Questions
+            {
+                question: "LMC: The Little Man has just read the instruction '3XX' (STA XX) from the mailbox indicated by his Program Counter and placed it in his Instruction Register. What is the IMMEDIATE next step the Little Man performs?",
+                type: "short_answer",
+                model_answer: "The Little Man increments his Program Counter.",
+                explanation: "After fetching any instruction, the LMC always increments the Program Counter to point to the next instruction in sequence, before decoding or executing the current one."
+            },
+            {
+                question: "LMC: The Little Man is executing an 'ADD 50' instruction. He has already fetched the instruction, incremented his PC, and decoded it. He has just gone to mailbox 50 and read the value from it. What is the IMMEDIATE next step?",
+                type: "short_answer",
+                model_answer: "The Little Man adds the value he just read from mailbox 50 to the value currently in his Accumulator.",
+                explanation: "For an ADD instruction, after fetching the operand from the specified mailbox, the LMC performs the addition with the Accumulator's current content."
+            },
+            {
+                question: "LMC: The Little Man is executing an 'INP' (901) instruction. He has fetched, incremented PC, and decoded it. What is his IMMEDIATE next action?",
+                type: "short_answer",
+                model_answer: "The Little Man goes to the In-Basket, takes the next number, and places it into his Accumulator.",
+                explanation: "The INP instruction causes the LMC to read a value from the input and store it in the Accumulator, overwriting its previous content."
+            },
+            {
+                question: "LMC: The Little Man is executing an 'STA 25' (Store Accumulator in mailbox 25) instruction. He has fetched, incremented PC, decoded, and now knows he needs to store the Accumulator's content. What is his IMMEDIATE next step?",
+                type: "short_answer",
+                model_answer: "The Little Man takes the value currently in his Accumulator and writes it into mailbox 25.",
+                explanation: "For an STA instruction, the LMC copies the value from the Accumulator to the specified mailbox, overwriting the mailbox's previous content. The Accumulator's value remains unchanged."
+            },
+            {
+                question: "LMC: The Little Man has just finished executing an instruction (e.g., an ADD operation). His Program Counter currently holds the address of the next instruction. What is the VERY first thing he does to begin the next instruction cycle?",
+                type: "short_answer",
+                model_answer: "The Little Man looks at his Program Counter to get the address of the next instruction to fetch.",
+                explanation: "The fetch phase begins with the LMC using the Program Counter to find out which mailbox contains the next instruction."
+            },
+             {
+                question: "LMC: The Program Counter (PC) holds '05'. The Little Man reads the instruction '107' (ADD 07) from mailbox 05 and places it in the Instruction Register. What is the value of the PC IMMEDIATELY after this fetch operation?",
+                type: "multiple_choice",
+                options: ["05", "06", "07", "107"],
+                answer: "06",
+                explanation: "After fetching an instruction, the Program Counter is immediately incremented to point to the next instruction in sequence (05 + 1 = 06)."
+            },
+            {
+                question: "LMC: The Little Man is executing a 'LDA 30' (Load Accumulator from mailbox 30) instruction. He has fetched it, incremented his PC, and decoded it. What is his IMMEDIATE next action?",
+                type: "short_answer",
+                model_answer: "The Little Man goes to mailbox 30, reads the value stored there, and places it into his Accumulator.",
+                explanation: "The LDA instruction requires the LMC to fetch the data from the specified mailbox and load it into the Accumulator, overwriting its previous content."
+            },
+            {
+                question: "LMC: The instruction 'HLT' (000) is in the Instruction Register. The Little Man has decoded it. What is his IMMEDIATE next action?",
+                type: "short_answer",
+                model_answer: "The Little Man stops executing instructions (halts the program).",
+                explanation: "The HLT instruction tells the Little Man to stop all operations. No further instructions are fetched or executed."
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let answered = false; // Flag to prevent multiple answers per question
+
+        // Get DOM elements
+        const startScreen = document.getElementById('start-screen');
+        const quizScreen = document.getElementById('quiz-screen');
+        const resultsScreen = document.getElementById('results-screen');
+        const startButton = document.getElementById('start-button');
+        const questionNumberSpan = document.getElementById('question-number');
+        const totalQuestionsSpan = document.getElementById('total-questions');
+        const questionText = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const feedbackArea = document.getElementById('feedback-area');
+        const explanationArea = document.getElementById('explanation-area');
+        const nextButton = document.getElementById('next-button');
+        const finalScore = document.getElementById('final-score');
+        const restartButton = document.getElementById('restart-button');
+
+        // Event Listeners
+        startButton.addEventListener('click', startGame);
+        nextButton.addEventListener('click', nextQuestion);
+        restartButton.addEventListener('click', restartGame);
+
+        function startGame() {
+            startScreen.classList.add('hidden');
+            quizScreen.classList.remove('hidden');
+            currentQuestionIndex = 0;
+            score = 0;
+            // Shuffle questions for variety each time
+            shuffleArray(questions);
+            totalQuestionsSpan.textContent = questions.length;
+            displayQuestion();
+        }
+        
+        // Function to shuffle an array (Fisher-Yates shuffle)
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+
+        function displayQuestion() {
+            answered = false; // Reset answered flag for new question
+            feedbackArea.textContent = ''; // Clear previous feedback
+            explanationArea.classList.add('hidden'); // Hide explanation
+            explanationArea.innerHTML = ''; // Clear previous explanation content
+            nextButton.disabled = true; // Disable next button until answered
+
+            const question = questions[currentQuestionIndex];
+            questionNumberSpan.textContent = currentQuestionIndex + 1;
+            questionText.textContent = question.question;
+            optionsContainer.innerHTML = ''; // Clear previous options
+
+            if (question.type === "multiple_choice") {
+                // Shuffle options for MCQs as well
+                const shuffledOptions = [...question.options];
+                shuffleArray(shuffledOptions);
+
+                shuffledOptions.forEach(option => {
+                    const button = document.createElement('button');
+                    button.textContent = option;
+                    button.classList.add('option-button');
+                    button.addEventListener('click', () => selectMultipleChoiceAnswer(button, option, question.answer, question.explanation));
+                    optionsContainer.appendChild(button);
+                });
+            } else if (question.type === "short_answer") {
+                const textarea = document.createElement('textarea');
+                textarea.classList.add('short-answer-input');
+                textarea.placeholder = "Type your answer here...";
+                textarea.id = "short-answer-textarea";
+                optionsContainer.appendChild(textarea);
+
+                const submitButton = document.createElement('button');
+                submitButton.textContent = "Submit Answer";
+                submitButton.classList.add('submit-button');
+                // Ensure we pass the correct model_answer and explanation for short answers
+                submitButton.addEventListener('click', () => submitShortAnswer(textarea.value, question.model_answer, question.explanation));
+                optionsContainer.appendChild(submitButton);
+
+                nextButton.disabled = true; // Keep next button disabled until short answer is submitted
+            }
+        }
+
+        function selectMultipleChoiceAnswer(selectedButton, selectedOption, correctAnswer, explanation) {
+            if (answered) return; // Prevent answering multiple times
+
+            answered = true;
+            const allOptions = optionsContainer.querySelectorAll('.option-button');
+            allOptions.forEach(button => button.classList.add('disabled')); // Disable all options
+
+            if (selectedOption === correctAnswer) {
+                selectedButton.classList.remove('incorrect'); // Ensure incorrect is not lingering
+                selectedButton.classList.add('correct');
+                feedbackArea.textContent = 'Correct!';
+                feedbackArea.classList.remove('text-red-600');
+                feedbackArea.classList.add('text-green-600');
+                score++;
+            } else {
+                selectedButton.classList.remove('correct'); // Ensure correct is not lingering
+                selectedButton.classList.add('incorrect');
+                feedbackArea.textContent = 'Incorrect.';
+                feedbackArea.classList.remove('text-green-600');
+                feedbackArea.classList.add('text-red-600');
+                // Highlight the correct answer
+                allOptions.forEach(button => {
+                    if (button.textContent === correctAnswer) {
+                        button.classList.add('correct');
+                    }
+                });
+            }
+
+            explanationArea.innerHTML = `<p class="font-bold">Explanation:</p><p>${explanation}</p>`;
+            explanationArea.classList.remove('hidden');
+            nextButton.disabled = false; // Enable next button
+        }
+
+        function submitShortAnswer(userAnswer, modelAnswer, explanation) {
+            if (answered) return; // Prevent multiple submissions
+
+            answered = true;
+            const submitButton = optionsContainer.querySelector('.submit-button');
+            const textarea = document.getElementById('short-answer-textarea');
+            if (textarea) textarea.disabled = true; // Disable textarea after submission
+            if (submitButton) submitButton.disabled = true; // Disable submit button
+
+            feedbackArea.textContent = 'Review the model answer below.';
+            feedbackArea.classList.remove('text-green-600', 'text-red-600'); // Neutral feedback for SA
+            feedbackArea.classList.add('text-gray-700');
+
+            explanationArea.innerHTML = `
+                <p class="font-bold mb-2">Your Answer:</p>
+                <p class="mb-4 p-2 bg-gray-100 rounded">${userAnswer || "No answer provided."}</p>
+                <p class="font-bold mb-2">Model Answer:</p>
+                <p class="mb-4 p-2 bg-blue-50 rounded border border-blue-200">${modelAnswer}</p>
+                <p class="font-bold mb-2">Further Explanation:</p>
+                <p>${explanation}</p>
+            `;
+            explanationArea.classList.remove('hidden');
+            nextButton.disabled = false; // Enable next button
+            // Short answers are not automatically scored, user self-assesses.
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                displayQuestion();
+            } else {
+                endGame();
+            }
+        }
+
+        function endGame() {
+            quizScreen.classList.add('hidden');
+            resultsScreen.classList.remove('hidden');
+            // Score is based only on MCQs.
+            const totalMCQ = questions.filter(q => q.type === 'multiple_choice').length;
+            const totalSA = questions.filter(q => q.type === 'short_answer').length;
+            
+            let scoreMessage = `You answered ${score} out of ${totalMCQ} multiple-choice questions correctly.`;
+            if (totalSA > 0) {
+                scoreMessage += ` There were also ${totalSA} short-answer questions for self-assessment.`;
+            }
+            finalScore.textContent = scoreMessage;
+        }
+
+        function restartGame() {
+            resultsScreen.classList.add('hidden');
+            startScreen.classList.remove('hidden');
+            // Reset game state (handled by startGame on next click)
+        }
+    </script>
+</body>
+</html>
