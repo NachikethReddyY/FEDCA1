@@ -44,7 +44,7 @@ Smooth Animation: The transition property makes it animate smoothly instead of s
 - **Separation of Concerns:** CSS handles layout, JS handles behavior
 - **Progressive Enhancement:** Works without JS, better with JS
 - **Pseudo-elements:** Powerful for decorative elements like lines and dots
-- **Viewport Detection:** `getBoundingClientRect()` is the standard way to detect element visibility
+- **Viewport Detection:** `getBoundingClientRect()` is the standard way to detect element visibility*/
 ```
 
 # Increasing numbers
